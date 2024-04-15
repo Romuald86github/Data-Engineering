@@ -1,0 +1,6 @@
+{
+    "bootstrap_servers": "kafka_broker1:9092,kafka_broker2:9092",
+    "topic": "your_topic_name",
+    "group_id": "your_consumer_group_id"
+  }
+  
