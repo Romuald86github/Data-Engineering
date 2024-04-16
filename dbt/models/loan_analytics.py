@@ -10,6 +10,17 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
+# Create the 'loan_analytics_output' table if it doesn't exist
+create_table_query = """
+CREATE TABLE IF NOT EXISTS loan_analytics_output (
+    Month INT,
+    TotalLoansPaid INT,
+    TotalAmountPaid FLOAT
+);
+"""
+cursor.execute(create_table_query)
+conn.commit()
+
 # Define the SQL query with Jinja templating
 sql_query = """
 WITH monthly_payments AS (
@@ -25,6 +36,7 @@ WITH monthly_payments AS (
     "Month"
 )
 
+INSERT INTO loan_analytics_output
 SELECT
   "Month",
   "TotalLoansPaid",
@@ -37,11 +49,7 @@ ORDER BY
 
 # Execute SQL query
 cursor.execute(sql_query)
-
-# Fetch and print results
-results = cursor.fetchall()
-for row in results:
-    print(row)
+conn.commit()
 
 # Close connection
 conn.close()
