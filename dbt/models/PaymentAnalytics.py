@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS PaymentAnalytics_output (
     PaidOnTime VARCHAR(3),
     LateTime VARCHAR(3),
     PaidMonth INT,
+    date_repaid,
     AmountPaid FLOAT,
     DefaultStatus VARCHAR(3)
 );
