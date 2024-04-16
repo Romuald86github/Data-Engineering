@@ -5,10 +5,16 @@ from google.oauth2 import service_account # type: ignore
 from googleapiclient.discovery import build # type: ignore
 
 # Authenticate with Google Data Studio API
+
+# Path to the service account JSON key file
+SERVICE_ACCOUNT_FILE = 'path_to_service_account.json'
+
+# Authenticate with the service account
 credentials = service_account.Credentials.from_service_account_file(
-    'path_to_service_account_file.json',
+    SERVICE_ACCOUNT_FILE,
     scopes=["https://www.googleapis.com/auth/datastudio"]
 )
+
 
 service = build('datastudio', 'v1', credentials=credentials)
 
