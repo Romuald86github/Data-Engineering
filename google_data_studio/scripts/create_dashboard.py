@@ -1,8 +1,8 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+import pandas as pd # type: ignore
+import matplotlib.pyplot as plt # type: ignore
 from google.cloud import bigquery
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
+from google.oauth2 import service_account # type: ignore
+from googleapiclient.discovery import build # type: ignore
 
 # Authenticate with Google Data Studio API
 credentials = service_account.Credentials.from_service_account_file(
