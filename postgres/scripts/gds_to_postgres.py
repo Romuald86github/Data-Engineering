@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS loan_table (
     credit_score INTEGER NOT NULL,
     loan_purpose TEXT NOT NULL,
     loan_type TEXT NOT NULL,
+    DefaultStatus TEXT,
     interest_rate REAL NOT NULL,
     loan_term INTEGER NOT NULL,
     address TEXT NOT NULL,
