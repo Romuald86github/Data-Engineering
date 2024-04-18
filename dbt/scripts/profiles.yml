@@ -1,0 +1,10 @@
+my_db:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: 'your_project_id'
+      dataset: 'your_dataset'
+      threads: 1
+      timeout_seconds: 300
