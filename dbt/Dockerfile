@@ -7,8 +7,11 @@ WORKDIR /app
 # Install dbt and psycopg2
 RUN pip install dbt psycopg2-binary
 
+# Initialize a new DBT project
+RUN dbt init my_dbt_project
+
 # Copy the dbt project files into the container
-COPY dbt /app
+COPY dbt /app/my_dbt_project
 
 # Copy the Python scripts into the container
 COPY loan_analytics.py /app
