@@ -1,0 +1,78 @@
+[0m00:32:54.633204 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa0b1bea790>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa0b2dfbbe0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa0b2dfb580>]}
+
+
+============================== 00:32:54.636776 | 148331a1-c897-46b8-9e6e-6790e08d4f34 ==============================
+[0m00:32:54.636776 [info ] [MainThread]: Running with dbt=1.7.13
+[0m00:32:54.637205 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'version_check': 'True', 'profiles_dir': '/Users/romualdchristialtcheutchoua/.dbt', 'log_path': 'logs', 'fail_fast': 'False', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'log_format': 'default', 'introspect': 'True', 'target_path': 'None', 'invocation_command': 'dbt init my_dbt_project', 'send_anonymous_usage_stats': 'True'}
+[0m00:32:54.638299 [debug] [MainThread]: Starter project path: /Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/include/starter_project
+[0m00:32:54.642814 [info ] [MainThread]: 
+Your new dbt project "my_dbt_project" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m00:32:54.643168 [info ] [MainThread]: Setting up your profile.
+[0m00:33:08.377496 [debug] [MainThread]: Traceback (most recent call last):
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/adapters/factory.py", line 58, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/adapters/bigquery/__init__.py", line 1, in <module>
+    from dbt.adapters.bigquery.connections import BigQueryConnectionManager  # noqa
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/adapters/bigquery/connections.py", line 12, in <module>
+    import google.cloud.bigquery
+ModuleNotFoundError: No module named 'google.cloud'
+
+[0m00:33:08.379068 [error] [MainThread]: Encountered an error:
+No module named 'google.cloud'
+[0m00:33:08.381823 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/cli/requires.py", line 91, in wrapper
+    result, success = func(*args, **kwargs)
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/cli/requires.py", line 76, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/cli/main.py", line 515, in init
+    results = task.run()
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/task/init.py", line 344, in run
+    self.setup_profile(profile_name)
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/task/init.py", line 264, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/task/init.py", line 174, in create_profile_from_target
+    load_plugin(adapter)
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/adapters/factory.py", line 212, in load_plugin
+    return FACTORY.load_plugin(name)
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/adapters/factory.py", line 58, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/adapters/bigquery/__init__.py", line 1, in <module>
+    from dbt.adapters.bigquery.connections import BigQueryConnectionManager  # noqa
+  File "/Users/romualdchristialtcheutchoua/opt/anaconda3/envs/Data-Engineering-project/lib/python3.9/site-packages/dbt/adapters/bigquery/connections.py", line 12, in <module>
+    import google.cloud.bigquery
+ModuleNotFoundError: No module named 'google.cloud'
+
+[0m00:33:08.387479 [debug] [MainThread]: Resource report: {"command_name": "init", "command_wall_clock_time": 13.781564, "process_user_time": 1.225071, "process_kernel_time": 0.138383, "process_mem_max_rss": "94457856", "command_success": false, "process_in_blocks": "0", "process_out_blocks": "0"}
+[0m00:33:08.389201 [debug] [MainThread]: Command `dbt init` failed at 00:33:08.388506 after 13.78 seconds
+[0m00:33:08.389919 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa0b1bea790>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa0b2dead90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa0b2e1d730>]}
+[0m00:33:08.390801 [debug] [MainThread]: Flushing usage events
