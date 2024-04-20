@@ -10,7 +10,7 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
-# Create the 'PaymentAnalytics_output' table if it doesn't exist
+# Create the 'PaymentAnalytics' table if it doesn't exist
 create_table_query = """
 CREATE TABLE IF NOT EXISTS PaymentAnalytics (
     PaidOnTime VARCHAR(3),

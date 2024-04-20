@@ -10,7 +10,7 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
-# Create the 'loan_analytics_output' table if it doesn't exist
+# Create the 'loan_analytics' table if it doesn't exist
 create_table_query = """
 CREATE TABLE IF NOT EXISTS loan_analytics (
     Month INT,
