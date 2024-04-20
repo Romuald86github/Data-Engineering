@@ -12,7 +12,7 @@ cursor = conn.cursor()
 
 # Create the 'loan_analytics_output' table if it doesn't exist
 create_table_query = """
-CREATE TABLE IF NOT EXISTS loan_analytics_output (
+CREATE TABLE IF NOT EXISTS loan_analytics (
     Month INT,
     TotalLoansPaid INT,
     TotalAmountPaid FLOAT
@@ -36,7 +36,7 @@ WITH monthly_payments AS (
     "Month"
 )
 
-INSERT INTO loan_analytics_output
+INSERT INTO loan_analytics
 SELECT
   "Month",
   "TotalLoansPaid",

@@ -22,8 +22,8 @@ client = bigquery.Client()
 
 # Define the BigQuery datasets and tables
 dataset_id = 'your_dataset_id'
-loan_table_id = 'loan_analytics_output'
-payment_table_id = 'PaymentAnalytics_output'
+loan_table_id = 'loan_analytics'
+payment_table_id = 'PaymentAnalytics'
 
 # Query to fetch data for charts
 loan_query = """

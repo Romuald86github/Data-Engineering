@@ -12,7 +12,7 @@ cursor = conn.cursor()
 
 # Create the 'PaymentAnalytics_output' table if it doesn't exist
 create_table_query = """
-CREATE TABLE IF NOT EXISTS PaymentAnalytics_output (
+CREATE TABLE IF NOT EXISTS PaymentAnalytics (
     PaidOnTime VARCHAR(3),
     LateTime VARCHAR(3),
     PaidMonth INT,
@@ -53,7 +53,7 @@ WITH payment_analytics AS (
     "DefaultStatus"
 )
 
-INSERT INTO PaymentAnalytics_output
+INSERT INTO PaymentAnalytics
 SELECT * FROM payment_analytics;
 """
 

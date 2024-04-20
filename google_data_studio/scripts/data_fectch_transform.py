@@ -8,8 +8,8 @@ def create_charts():
 
     # Define the BigQuery datasets and tables
     dataset_id = 'your_dataset_id'
-    loan_table_id = 'PaymentAnalytics_output'   
-    payment_table_id =  'loan_analytics_output'
+    loan_table_id = 'PaymentAnalytics'   
+    payment_table_id =  'loan_analytics'
     # Query to fetch data for charts
     loan_query = """
     SELECT *
