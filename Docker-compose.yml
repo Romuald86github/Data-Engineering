@@ -11,6 +11,7 @@ services:
     build:
       context: ./kafka
       dockerfile: Dockerfile
+    image: confluentinc/cp-kafka:latest  
     depends_on:
       - zookeeper
     ports:
