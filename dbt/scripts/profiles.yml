@@ -5,6 +5,6 @@ my_db:
       type: bigquery
       method: oauth
       project: 'your_project_id'
-      dataset: 'your_dataset'
+      dataset: 'your_dataset_id'
       threads: 1
       timeout_seconds: 300
