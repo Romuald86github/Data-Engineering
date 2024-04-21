@@ -1,0 +1,10 @@
+my_bigquery_connection:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: your_project_id
+      dataset: your_dataset_id
+      threads: 1
+      keyfile: /path/to/your/service-account.json
