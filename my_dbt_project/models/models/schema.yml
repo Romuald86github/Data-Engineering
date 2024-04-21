@@ -2,20 +2,36 @@
 version: 2
 
 models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
+  - name: monthly_payments
+    description: "View containing monthly payments analytics."
     columns:
-      - name: id
-        description: "The primary key for this table"
+      - name: Month
+        description: "The month when the loan was repaid."
         tests:
           - unique
-          - not_null
+      - name: TotalLoansPaid
+        description: "Total number of loans paid in the month."
+      - name: TotalAmountPaid
+        description: "Total amount repaid in the month."
 
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
+  - name: payment_analytics
+    description: "View containing payment analytics."
     columns:
-      - name: id
-        description: "The primary key for this table"
+      - name: PaidOnTime
+        description: "Indicates whether the payment was made on time (Yes/No)."
+        tests:
+          - accepted_values: ['Yes', 'No']
+      - name: LateTime
+        description: "Time taken for payment after expected repayment date."
+        tests:
+          - accepted_values: ['< 7', '> 7']
+      - name: PaidMonth
+        description: "The month when the payment was made."
         tests:
           - unique
-          - not_null
+      - name: AmountPaid
+        description: "Total amount paid for the loans in the month."
+      - name: DefaultStatus
+        description: "Indicates if the loan was defaulted (Yes/No)."
+        tests:
+          - accepted_values: ['Yes', 'No']
