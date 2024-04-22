@@ -1,11 +1,12 @@
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator # type: ignore
-from airflow.operators.bash_operator import BashOperator # type: ignore
-from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator # type: ignore
-from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator # type: ignore
-from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator # type: ignore
+from airflow.operators.python_operator import PythonOperator  # type: ignore
+from airflow.operators.bash_operator import BashOperator  # type: ignore
+from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator  # type: ignore
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator  # type: ignore
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator  # type: ignore
 from datetime import datetime, timedelta
 import os
+# Add any additional required libraries here
 
 default_args = {
     'owner': 'airflow',
@@ -13,7 +14,7 @@ default_args = {
     'start_date': datetime(2022, 1, 1),
     'email_on_failure': False,
     'email_on_retry': False,
-    'retries': 1,
+    'retries': 2,
     'retry_delay': timedelta(minutes=5),
 }
 
@@ -29,7 +30,9 @@ BASE_DIR = '/path/to/your/repo'
 KAFKA_DIR = os.path.join(BASE_DIR, 'kafka', 'scripts')
 PYSPARK_DIR = os.path.join(BASE_DIR, 'pyspark', 'scripts')
 POSTGRES_DIR = os.path.join(BASE_DIR, 'postgres', 'scripts')
-DBT_DIR = os.path.join(BASE_DIR, 'dbt', 'models')
+DBT_DIR = os.path.join(BASE_DIR, 'my_dbt_project', 'models')
+ANALYSES_DIR = os.path.join(BASE_DIR, 'my_dbt_project', 'analyses')
+TESTS_DIR = os.path.join(BASE_DIR, 'my_dbt_project', 'tests')
 GDS_DIR = os.path.join(BASE_DIR, 'google_data_studio', 'scripts')
 TERRAFORM_DIR = os.path.join(BASE_DIR, 'terraform', 'scripts')
 
@@ -80,9 +83,39 @@ postgres_to_bigquery = PythonOperator(
 )
 
 # DBT tasks
-dbt_run = PythonOperator(
-    task_id='dbt_run',
-    python_callable=lambda: os.system(f'dbt run --profiles-dir {DBT_DIR}'),
+dbt_monthly_payments = PythonOperator(
+    task_id='dbt_monthly_payments',
+    python_callable=lambda: os.system(f'dbt run --profiles-dir {DBT_DIR} --model monthly_payments'),
+    dag=dag,
+)
+
+dbt_payment_analytics = PythonOperator(
+    task_id='dbt_payment_analytics',
+    python_callable=lambda: os.system(f'dbt run --profiles-dir {DBT_DIR} --model payment_analytics'),
+    dag=dag,
+)
+
+dbt_loan_analytics_analysis = PythonOperator(
+    task_id='dbt_loan_analytics_analysis',
+    python_callable=lambda: os.system(f'dbt run --profiles-dir {DBT_DIR} --analysis-file {ANALYSES_DIR}/loan_analytics_analysis.sql'),
+    dag=dag,
+)
+
+dbt_payment_analytics_analysis = PythonOperator(
+    task_id='dbt_payment_analytics_analysis',
+    python_callable=lambda: os.system(f'dbt run --profiles-dir {DBT_DIR} --analysis-file {ANALYSES_DIR}/payment_analytics_analysis.sql'),
+    dag=dag,
+)
+
+dbt_loan_analytics_tests = PythonOperator(
+    task_id='dbt_loan_analytics_tests',
+    python_callable=lambda: os.system(f'dbt run --profiles-dir {DBT_DIR} --data --target test --m {TESTS_DIR}/loan_analytics_tests.sql'),
+    dag=dag,
+)
+
+dbt_payment_analytics_tests = PythonOperator(
+    task_id='dbt_payment_analytics_tests',
+    python_callable=lambda: os.system(f'dbt run --profiles-dir {DBT_DIR} --data --target test --m {TESTS_DIR}/payment_analytics_tests.sql'),
     dag=dag,
 )
 
@@ -118,4 +151,4 @@ create_dashboard = PythonOperator(
 )
 
 # Define task dependencies
-terraform_apply >> ingestion >> pyspark_transform >> init_postgres >> gds_to_postgres >> postgres_transform >> postgres_to_bigquery >> dbt_run >> authentication >> gds_report >> data_fetch_transform >> update_report >> create_dashboard
+terraform_apply >> ingestion >> pyspark_transform >> init_postgres >> gds_to_postgres >> postgres_transform >> postgres_to_bigquery >> dbt_monthly_payments >> dbt_payment_analytics >> dbt_loan_analytics_analysis >> dbt_payment_analytics_analysis >> dbt_loan_analytics_tests >> dbt_payment_analytics_tests >> authentication >> gds_report >> data_fetch_transform >> update_report >> create_dashboard
